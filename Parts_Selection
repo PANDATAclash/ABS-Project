@@ -1,0 +1,8 @@
+For this setup (GPS + IMU + wheel hall sensor + brake pressure + microSD + BLE over UART), Teensy 4.1 is better than an ESP32-WROOM because it’s a more reliable real-time data logger: built-in microSD (fast, clean wiring), more deterministic timing for detecting lock start, and more processing headroom so SD writes + sensor reads don’t cause jitter. Since we will use a separate BLE module, the ESP32’s main advantage (built-in wireless) isn’t needed.
+
+-Bluetooth module (Bluefruit LE UART Friend): Simple BLE over UART—easy to stream live stats to a phone/laptop without loading the main MCU with radio stack work, keeping logging timing stable.
+ 
+-IMU (BNO085): Built-in sensor fusion provides clean orientation and motion data (accel/gyro/rotation) with minimal tuning, letting you correlate braking events with bike pitch/roll and vibration.
+ 
+-Adafruit GPS (10 Hz): Gives a reliable “true speed” reference and position data with enough update rate to track speed changes during braking runs, so you can compare wheel speed vs real ground speed during a lock.
+  
